@@ -623,8 +623,7 @@ const controlServings = function(newServings) {
 };
 const controlAddBookmark = function() {
     _modelJs.addBookmark(_modelJs.state.recipe);
-    console.log(_modelJs.state.recipe);
-    (0, _recipeViewJsDefault.default).update();
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipe);
@@ -2926,13 +2925,8 @@ class View {
         const curElements = Array.from(this._parentElement.querySelectorAll("*"));
         newElements.forEach((newEl, i)=>{
             const curEl = curElements[i];
-            console.log(curEl);
-            console.log(newEl.isEqualNode(curEl));
             //Updates changed text
-            if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") {
-                console.log(newEl.firstChild.nodeValue.trim() !== "");
-                curEl.textContent = newEl.textContent;
-            }
+            if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") curEl.textContent = newEl.textContent;
             //Updates changed attributes
             if (!newEl.isEqualNode(curEl)) Array.from(newEl.attributes).forEach((attr)=>curEl.setAttribute(attr.name, attr.value));
         });
